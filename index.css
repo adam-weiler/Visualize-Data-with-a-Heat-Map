@@ -27,9 +27,9 @@ svg {
 }
 
 .bar {
-	fill: #50b432;
+/* 	fill: #50b432; */
 	stroke: white;
-	stroke-width: .3
+	stroke-width: .1
 }
 
 .bar:hover {
