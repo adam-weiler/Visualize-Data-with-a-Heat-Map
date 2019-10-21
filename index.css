@@ -26,14 +26,18 @@ svg {
 	font-weight: bold;
 }
 
-.bar {
-/* 	fill: #50b432; */
-	stroke: white;
-	stroke-width: .1
+#description {
+	font-size: 23px;
+	font-weight: bold;
 }
 
-.bar:hover {
-	fill: #9bf1ff;
+.cell {
+	stroke: #FFF;
+	stroke-width: .1;
+}
+
+.cell:hover {
+	fill: #000 !important;
 }
 
 #tooltip {
@@ -49,4 +53,8 @@ svg {
 	font-size: 18px;
 	pointer-event: none;
 	border-radius: 4px;
+}
+
+h2 {
+  font-size: 18px;
 }
