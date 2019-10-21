@@ -129,12 +129,12 @@ d3.json(url, (err, data) => { //Gets the data from the json file.
 		.attr('transform', 'translate(100,0)')
 		.attr('x', svgHorizontalPadding * 4)
 		.attr('y', svgVerticalPadding / 2)
-		.text('1753 - 2015: base temperature 8.66℃')
+		.text('1753 - 2015: Base temperature 8.66℃')
 
 	svgContainer.append('text') //X-Axis label.
 		.attr('transform', 'translate(100,0)')
 		.attr('x', svgWidth / 2.8)
-		.attr('y', svgHeight - 20)
+		.attr('y', svgHeight - 80)
 		.text('Years')
 
 	svgContainer.append('text') //Y-Axis label.
@@ -201,7 +201,7 @@ d3.json(url, (err, data) => { //Gets the data from the json file.
 				return colours[8];
 			} else if (temp < 12.8) {
 				return colours[9];
-			} else {  // Higher than 12.8
+			} else if (temp < 14) {  // Higher than 12.8
 				return colours[10];
 			}
 		})
@@ -213,8 +213,9 @@ d3.json(url, (err, data) => { //Gets the data from the json file.
 			//console.log('The data-date field: ', data.data[i][0]);
 
 			//Populates tooltip div with current year, month, variance, and temperature.
-			tooltipDiv.html(`<h2>${d.year} ${monthNames[d.month]}</h2>
-			<p>Variance ${d.variance}</p><p>Temperature: ${d.variance + data.baseTemperature}</p>`) //Adds a comma in the money value.
+			tooltipDiv.html(`<h2>${d.year} ${monthNames[d.month-1]}</h2>
+			<p>Temperature: ${(d.variance + data.baseTemperature).toFixed(3)}℃</p>
+<p>Variance ${d.variance}℃</p>`)
 				.style('left', (d3.event.pageX + 25) + 'px') //Div appears to the right of the rectangle.
 				.style('top', (d3.event.pageY - 10) + 'px');
 		})
@@ -234,24 +235,20 @@ d3.json(url, (err, data) => { //Gets the data from the json file.
 		.attr('transform', 'translate(' + (svgHorizontalPadding) + ',0)')
   
   
-  
-  
+   
 
    
     const xScaleLegend = d3
 		.scaleLinear()
-		.domain([0, 10])
+		.domain([0, 11])
 		.range([svgHorizontalPadding, (500) - svgVerticalPadding]);
 
 	const xAxisLegend = d3
 		.axisBottom(xScaleLegend)
 		.tickFormat((d, i) => {
-			const scaleLabel = (2.8 + (1.1 * i))
+			const scaleLabel = (1.7 + (1.1 * i))
 			return scaleLabel.toFixed(1)
 		})
-
-
-
 
     
   
@@ -262,17 +259,15 @@ d3.json(url, (err, data) => { //Gets the data from the json file.
 		.select('body')
 		.append('svg')
 		.attr('class', 'svg-legend')
-		.attr('width', 550)
-		.attr('height', 250)
-		.attr('x', svgHorizontalPadding)
-		.attr('y', 50)
+		.attr('width', 450)
+		.attr('height', 100)
+		// .attr('x', svgHorizontalPadding)
+		// .attr('y', -400)
 		.attr('id', 'legend');
-
-
-
+  
 	svgLegend
 		.append('g')
-		.attr('transform', 'translate(0, 40)')
+		.attr('transform', 'translate(-23, 40)')
 		.attr('id', 'x-axislegend')
 		.call(xAxisLegend)
 
@@ -287,7 +282,7 @@ d3.json(url, (err, data) => { //Gets the data from the json file.
 		.attr('y', (d) => {
 			return 10;
 		})
-		.attr('width', 300)
+		.attr('width', 28)
 		.attr('height', 30)
 		.style('fill', (d, i) => {
 			return colours[i];
